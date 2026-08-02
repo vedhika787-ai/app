@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Outfit", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+  /* Futuristic Core Colors */
+  --color-background: #030308;
+  --color-foreground: #f3f4f6;
+
+  --color-primary: #8b5cf6;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f97316;
+  --color-secondary-foreground: #ffffff;
+  
+  --color-accent: #3b82f6;
+  --color-muted: #1e1e2d;
+  --color-muted-foreground: #9ca3af;
+  
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-glass: rgba(15, 15, 25, 0.4);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+
+  /* Animation Configurations */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 3s ease-in-out infinite;
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.8), 0 0 10px rgba(249, 115, 22, 0.4);
+    }
+  }
+}
+
+/* Base Styles */
+@layer base {
+  :root {
+    --background: #030308;
+    --foreground: #f3f4f6;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Webkit Scrollbar Restyling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e1e2d;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3b82f6;
+  }
+}
+
+/* Custom UI Utilities */
+@layer utilities {
+  .glassmorphism {
+    @apply bg-[var(--color-glass)] backdrop-blur-xl border border-[var(--color-glass-border)] shadow-2xl;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5), 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+
+  .gradient-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary via-accent to-secondary;
+  }
+
+  .interactive-button {
+    @apply relative overflow-hidden transition-all duration-300 ease-out 
+           hover:shadow-[0_0_20px_rgba(139,92,246,0.6)] hover:scale-[1.02]
+           active:scale-95 disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .interactive-input {
+    @apply bg-[var(--color-muted)] border-[var(--color-border)] 
+           focus:border-primary focus:ring-1 focus:ring-primary 
+           transition-all duration-300 outline-none text-foreground;
+  }
+}
